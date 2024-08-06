@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Settings page for BankOfLord.">
+    <title>BankOfLord - Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+        header {
+            position: relative;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+        .nav-item {
+            position: relative;
+            margin: 0 15px;
+        }
+        .nav-item > a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-item > a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #f48a2e;
+            transform: translateX(-50%) scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .nav-item > a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            min-width: 200px;
+            z-index: 1000;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f48a2e;
+            color: white;
+        }
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+        .login-button {
+            background-color: #f48a2e;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .login-button:hover {
+            background-color: #e07b2b;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 5px 10px;
+            transition: width 0.3s ease;
+        }
+        .search-container input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 18px;
+            font-size: 14px;
+            outline: none;
+            width: 200px;
+            transition: width 0.3s ease;
+        }
+        .search-container.active input[type="text"] {
+            width: 300px;
+        }
+        .search-container button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 18px;
+            background-color: #f48a2e;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background-color 0.3s;
+        }
+        .search-container button:hover {
+            background-color: #e07b2b;
+        }
+        .backgroundd {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            background-color: #f6f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            padding: 30px;
+            top: 50px;
+        }
+        .header-text {
+            text-align: center;
+            font-weight: 900;
+            font-size: 24px;
+            margin: 20px 0;
+            color: #333;
+        }
+        .header-subtext {
+            text-align: center;
+            font-size: 16px;
+            margin: 20px 0;
+            color: #9c9c9c;
+        }
+        .section {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .section label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .section input[type="text"], .section input[type="email"], .section input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 18px;
+            font-size: 14px;
+        }
+        .section button {
+            background-color: #f48a2e;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .section button:hover {
+            background-color: #e07b2b;
+        }
+        .user-info {
+            font-size: 18px;
+            font-weight: 100;
+            color: #272727;
+            cursor: pointer;
+            position: relative;
+        }
+        .user-info .balance {
+            color: #f48a2e;
+        }
+        .user-info-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f48a2e;
+            border-radius: 5px;
+            padding: 10px;
+            list-style: none;
+            margin: 0;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        .user-info:hover .user-info-dropdown {
+            display: block;
+        }
+        .user-info-dropdown li {
+            margin: 5px 0;
+        }
+        .user-info-dropdown a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .user-info-dropdown a:hover {
+            background-color: #e07b2b;
+        }
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .spinner {
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-top: 8px solid #ff861c;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1.2s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="loading-overlay">
+            <div class="spinner"></div>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#">ჩემთვის</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">იპოთეკური</a></li>
+                        <li><a href="#">განვადება</a></li>
+                        <li><a href="#">ავტო სესხი</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#">ჩემი მიზნებისთვის</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">გადარიცხვა ონლაინ</a></li>
+                        <li><a href="#">ფუნქცია მალე დაემატება</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#">შეუკვეთე ნაკრები</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">სტუდენტის ნაკრები</a></li>
+                        <li><a href="#">მოსწავლის ნაკრები</a></li>
+                        <li><a href="#">შეუკვეთე სტუდენტის ნაკრები უფასოდ</a></li>
+                    </ul>
+                </li>
+                {% if 'username' in session %}
+                <li class="nav-item user-info">
+                    <span>{{ username }} - <span class="balance">₾ {{ balance }}</span></span>
+                    <ul class="user-info-dropdown">
+                        <li><a href="{{ url_for('settings') }}">პარამეტრები</a></li>
+                        <li><a href="{{ url_for('info') }}">ინფორმაცია</a></li>
+                        <li><a href="{{ url_for('logout') }}">გასვლა</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <button class="login-button" onclick="location.href='{{ url_for('login') }}'">შესვლა</button>
+                </li>
+                {% endif %}
+            </ul>
+            <div class="search-container">
+                <input type="text" placeholder="ძებნა..." id="search-input">
+                <button type="button" onclick="toggleSearch()">ძებნა</button>
+            </div>
+        </nav>
+        <h3 class="header-text">პარამეტრები</h3>
+        <p class="header-subtext">გაათვალისწინე შენი პარამეტრები და შეცვალე საჭირო ინფორმაციები.</p>
+        <div class="backgroundd">
+            <!-- Settings Content -->
+            <div class="section">
+                <h4>მომხმარებლის ინფორმაცია</h4>
+                <form action="/update-username" method="POST">
+                    <label for="username">ახალი მომხმარებლის სახელი</label>
+                    <input type="text" id="username" name="username" placeholder="ახალი მომხმარებლის სახელი">
+                    <button type="submit">განაახლე სახელი</button>
+                </form>
+            </div>
+            <div class="section">
+                <h4>ელ-ფოსტის შეცვლა</h4>
+                <form action="/update-email" method="POST">
+                    <label for="email">ახალი ელ-ფოსტა</label>
+                    <input type="email" id="email" name="email" placeholder="ახალი ელ-ფოსტა">
+                    <button type="submit">განაახლე ელ-ფოსტა</button>
+                </form>
+            </div>
+            <div class="section">
+                <h4>პაროლის შეცვლა</h4>
+                <form action="/reset-password" method="POST">
+                    <label for="current-password">მიმდინარე პაროლი</label>
+                    <input type="password" id="current-password" name="current_password" placeholder="მიმდინარე პაროლი">
+                    <label for="new-password">ახალი პაროლი</label>
+                    <input type="password" id="new-password" name="new_password" placeholder="ახალი პაროლი">
+                    <button type="submit">განაახლე პაროლი</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <script>
+        function toggleSearch() {
+            const input = document.getElementById('search-input');
+            input.classList.toggle('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-overlay').style.display = 'none';
+            document.body.style.display = 'block';
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(hideLoading, 3000);
+        });
+    </script>
+</body>
+</html>

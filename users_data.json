@@ -1,0 +1,26 @@
+[
+    {
+        "username": "\u10d3\u10d0\u10e9\u10d8 \u10d3\u10d4\u10d5\u10d0\u10eb\u10d4",
+        "email": "dachy5555@gmail.com",
+        "password": "dachia21",
+        "balance": 100.0,
+        "phone": "+995 593 33 55 72",
+        "cardnumber": "542536523323",
+        "cvcode": "435",
+        "private_number": "61201094827",
+        "date": "11/27",
+        "ip": ""
+    },
+    {
+        "username": "\u10d3\u10d0\u10e9\u10d8 \u10db\u10d0\u10db\u10d0\u10da\u10d0\u10eb\u10d4",
+        "email": "dachy5555@gmail.com",
+        "password": "dachia21",
+        "balance": 0.0,
+        "phone": "+995 577283916",
+        "cardnumber": "4231453545324",
+        "cvcode": "435",
+        "private_number": "61201094827",
+        "date": "11/27",
+        "ip": ""
+    }
+]

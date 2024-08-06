@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login page for BankOfLord. Access your account securely.">
+    <title>შესვლა</title>
+    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon"> <!-- Optional favicon -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0); /* Gradient background for modern look */
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            color: #333;
+            font-weight: 100;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .login-container {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            margin: 0 auto; /* Center align horizontally */
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            outline: none;
+            background: #f9f9f9;
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #f48a2e; /* Orange border on focus */
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            background-color: #f48a2e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            outline: none;
+        }
+
+        .login-container button:hover {
+            background-color: #e07b2b;
+            transform: scale(1.05);
+        }
+
+        .login-container .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .login-container .links {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .login-container .links a {
+            color: #f48a2e;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .login-container .links a:hover {
+            color: #e07b2b;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <h3 class="logo">Bank of Lord</h3>
+            <h2>შესვლა</h2>
+            <form action="/login" method="post">
+                <label for="username">მომხმარებლის სახელი</label>
+                <input type="text" id="username" name="username" required aria-label="Username">
+
+                <label for="password">პაროლი</label>
+                <input type="password" id="password" name="password" required aria-label="Password">
+
+                <button type="submit">შესვლა</button>
+                
+                <!-- Optional error message -->
+                <!-- <div class="error">არასწორი სახელი ან პაროლი</div> -->
+                
+                <div class="links">
+                    <a href="register">რეგისტრაცია</a> | 
+                    <a href="/forgot_password">დაგავიწყდა პაროლი?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

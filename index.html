@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BankOfLord - The best bank in Georgia with innovative financial solutions.">
+    <title>BankOfLord - საუკეთესო ბანკი</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        header {
+            position: relative;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: transparent; /* Removed background color */
+            box-shadow: none; /* Removed box-shadow */
+            z-index: 10; /* Ensure navbar is on top */
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .nav-item > a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item > a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #f48a2e;
+            transform: translateX(-50%) scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item > a:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Button styles */
+        .login-button {
+            background-color: #f48a2e;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #e07b2b;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f48a2e;
+            border-radius: 5px;
+            padding: 10px;
+            list-style: none;
+            margin: 0;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .dropdown.show {
+            display: block;
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        .nav-item:hover .dropdown {
+            display: block;
+            opacity: 1;
+            transform: scaleY(1);
+        }
+
+        .dropdown li {
+            margin: 5px 0;
+        }
+
+        .dropdown a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown a:hover {
+            background-color: #e07b2b;
+        }
+
+        /* Search Container */
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 5px 10px;
+            transition: width 0.3s ease;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            width: 0;
+            transition: width 0.4s ease;
+            flex: 1;
+        }
+
+        .search-container input[type="text"].active {
+            width: 200px;
+        }
+
+        .search-container button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 20px;
+            background-color: #f48a2e;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .search-container button:hover {
+            background-color: #e07b2b;
+        }
+
+        /* Banner Slider Styles */
+        .backgroundd {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 300px;
+            background-color: #f6f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            top: 50px; /* Adjusted positioning */
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 20px;
+            background-color: #f6f4f4;
+        }
+
+        .slide h3 {
+            color: black;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .slide button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f48a2e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .slide button:hover {
+            background-color: #e07b2b;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 50%;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: none;
+            color: #ff7504;
+            transition: color 0.3s ease;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        .spinner {
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-top: 8px solid #ff861c;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Header Text Styles */
+        .header-text {
+            text-align: center;
+            font-weight: 900;
+            font-size: 24px;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .header-subtext {
+            text-align: center;
+            font-size: 16px;
+            margin: 20px 0;
+            color: #9c9c9c;
+        }
+
+        /* Username and balance styles */
+        .user-info {
+            font-size: 18px;
+            font-weight: 100;
+            color: #272727;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-info .balance {
+            color: #f48a2e; /* Highlight color for balance */
+        }
+
+        /* Dropdown User Info */
+        .user-info-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f48a2e;
+            border-radius: 5px;
+            padding: 10px;
+            list-style: none;
+            margin: 0;
+            min-width: 150px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .user-info:hover .user-info-dropdown {
+            display: block;
+        }
+
+        .user-info-dropdown li {
+            margin: 5px 0;
+        }
+
+        .user-info-dropdown a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .user-info-dropdown a:hover {
+            background-color: #e07b2b;
+        }
+
+        /* Chatbox Styles */
+        .chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .chatbox-header {
+            background-color: #f48a2e;
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbox-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .chatbox-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .chatbox-body .message {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 10px;
+            background-color: #f1f1f1;
+            max-width: 80%;
+        }
+
+        .chatbox-body .message.user {
+            background-color: #f48a2e;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chatbox-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .chatbox-footer input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .chatbox-footer button {
+            background-color: #f48a2e;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chatbox-footer button:hover {
+            background-color: #e07b2b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="loading-overlay">
+            <div class="spinner"></div>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#">ჩემთვის</a>
+                    <ul class="dropdown">
+                        <li><a href="#">იპოთეკური</a></li>
+                        <li><a href="#">განვადება</a></li>
+                        <li><a href="#">ავტო სესხი</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#">ჩემი მიზნებისთვის</a>
+                    <ul class="dropdown">
+                        <li><a href="#">გადარიცხვა ონლაინ</a></li>
+                        <li><a href="#">ფუნქცია მალე დაემატება</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#">შეუკვეთე ნაკრები</a>
+                    <ul class="dropdown">
+                        <li><a href="#">სტუდენტის ნაკრები</a></li>
+                        <li><a href="#">მოსწავლის ნაკრები</a></li>
+                        <li><a href="#">შეუკვეთე სტუდენტის ნაკრები უფასოდ</a></li>
+                    </ul>
+                </li>
+                {% if 'username' in session %}
+                <li class="nav-item user-info">
+                    <span>{{ username }} - <span class="balance">₾ {{ balance }}</span></span>
+                    <ul class="user-info-dropdown">
+                        <li><a href="{{ url_for('settings') }}">პარამეტრები</a></li>
+                        <li><a href="{{ url_for('info') }}">ინფორმაცია</a></li>
+                        <li><a href="{{ url_for('logout') }}">გასვლა</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <button class="login-button" onclick="location.href='{{ url_for('login') }}'">შესვლა</button>
+                </li>
+                {% endif %}
+            </ul>
+            <div class="search-container">
+                <input type="text" placeholder="ძებნა..." id="search-input">
+                <button type="button" onclick="toggleSearch()">ძებნა</button>
+            </div>
+        </nav>
+        <h3 class="header-text">კომუნიკაბელური ახალი ბანკი საქართველოში</h3>
+        <p class="header-subtext">ახალი სიახლეები მალე დაემატება</p>
+        <div class="backgroundd">
+            <div class="slides">
+                <div class="slide">
+                    <h3>მოსწავლის ნაკრები უკვე გაუმჯობესდა</h3>
+                    <button>გაიგე მეტი</button>
+                </div>
+                <div class="slide">
+                    <h3>აიღე სესხი მარტივად!</h3>
+                    <button>გადასვლა</button>
+                </div>
+                <div class="slide">
+                    <h3>ახალი სერვისები</h3>
+                    <button>გაიგე მეტი</button>
+                </div>
+                <div class="slide">
+                    <h3>შეუკვეთე სტუდენტის ნაკრები უფასოდ</h3>
+                    <button>შეკვეთა</button>
+                </div>
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </header>
+
+    
+
+    <script>
+        // Toggle chatbox visibility
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatbox.style.display === 'none' || chatbox.style.display === '' ? 'flex' : 'none';
+        }
+
+        // Function to hide loading overlay and show main content
+        function hideLoading() {
+            document.getElementById('loading-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                document.body.style.display = 'block'; // Show the body content
+            }, 300); // Delay to allow for opacity transition
+        }
+
+        // Hide loading overlay after 3 seconds
+        window.addEventListener('load', () => {
+            setTimeout(hideLoading, 3000);
+        });
+
+        // Chatbox functionality
+       
+        
+
+        function toggleSearch() {
+            const input = document.getElementById('search-input');
+            input.classList.toggle('active');
+            input.focus();
+        }
+
+        // Banner Slider Functionality
+        let currentSlide = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function moveSlide(step) {
+            currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    </script>
+    <!--Start of Tawk.to Script-->
+</html>

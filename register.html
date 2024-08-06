@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registration page for BankOfLord. Create your account securely.">
+    <title>რეგისტრაცია</title>
+    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon"> <!-- Optional favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0); /* Gradient background for modern look */
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .container {
+            text-align: center;
+            position: relative; /* For positioning the background extension */
+        }
+
+        .logo {
+            font-size: 36px;
+            color: #333;
+            font-weight: 100;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .register-container {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            position: relative;
+            margin: 0 auto; /* Center align horizontally */
+            overflow: hidden; /* Hide the overflow of the pseudo-element */
+        }
+
+        .register-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%; /* Extend background to the left */
+            width: 200%;
+            height: 100%;
+            background: rgba(244, 138, 46, 0.2); /* Light orange background */
+            z-index: -1; /* Place the background behind the content */
+            border-radius: 15px; /* Match the border radius of the container */
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .register-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="email"],
+        .register-container input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            outline: none;
+            background: #f9f9f9;
+        }
+
+        .register-container input[type="text"]:focus,
+        .register-container input[type="email"]:focus,
+        .register-container input[type="password"]:focus {
+            border-color: #f48a2e; /* Orange border on focus */
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            background-color: #f48a2e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            outline: none;
+        }
+
+        .register-container button:hover {
+            background-color: #e07b2b;
+            transform: scale(1.05);
+        }
+
+        .register-container .alert {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .register-container .error {
+            color: red;
+        }
+
+        .register-container .success {
+            color: green;
+        }
+
+        .register-container .links {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .register-container .links a {
+            color: #f48a2e;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .register-container .links a:hover {
+            color: #e07b2b;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-input-wrapper {
+            position: relative;
+        }
+
+        .card-input-wrapper input {
+            padding-right: 40px; /* Space for card icons */
+        }
+
+        .card-input-wrapper i {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #999;
+            pointer-events: none; /* Prevent interaction with icons */
+        }
+
+        .card-input-wrapper .visa-icon {
+            color: #1a1f71; /* Visa blue */
+        }
+
+        .card-input-wrapper .mastercard-icon {
+            color: #ff5f00; /* MasterCard orange */
+        }
+
+        .card-input-wrapper .diners-icon {
+            color: #009e49; /* Diners Club green */
+        }
+
+        /* Date input styling */
+        .date-input-wrapper {
+            position: relative;
+        }
+
+        .date-input-wrapper input {
+            padding-right: 40px; /* Space for icons if needed */
+        }
+
+        .date-input-wrapper i {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #999;
+            pointer-events: none; /* Prevent interaction with icons */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="register-container">
+            <h3 class="logo">Bank of Lord</h3>
+            <h2>რეგისტრაცია</h2>
+            <form id="registrationForm" action="/register" method="post">
+                <label for="username">მომხმარებლის სახელი და გვარი</label>
+                <input type="text" id="username" name="username" required aria-label="Username" placeholder="სავალდებულოა ქართულად">
+
+                <label for="email">ელ-ფოსტა</label>
+                <input type="email" id="email" name="email" required aria-label="Email" placeholder="მაგ: test123@gmail.com">
+
+                <label for="phone">ტელეფონის ნომერი</label>
+                <input type="text" id="phone" name="phone" required aria-label="Phone Number">
+
+                <div class="card-input-wrapper">
+                    <label for="cardnumber">ბარათის ნომერი</label>
+                    <input type="text" id="cardnumber" name="cardnumber" required aria-label="Card Number">
+                    <i class="fab fa-cc-visa visa-icon" aria-label="Visa"></i>
+                    <i class="fab fa-cc-mastercard mastercard-icon" aria-label="MasterCard"></i>
+                    <i class="fab fa-cc-diners-club diners-icon" aria-label="Diners Club"></i>
+                </div>
+
+                <div class="card-input-wrapper">
+                    <label for="cvcode">CV კოდი</label>
+                    <input type="text" id="cvcode" name="cvcode" required aria-label="CV Code">
+                    <i class="fas fa-credit-card" aria-label="Credit Card"></i>
+                </div>
+
+                <label for="private_number">პირადი ნომერი</label>
+                <input type="text" id="private_number" name="private_number" required aria-label="Private Number">
+
+                <label for="date">თარიღი (ბარათის დღე/წელი, მაგალითად 27/18)</label>
+                <div class="date-input-wrapper">
+                    <input type="text" id="date" name="date" required aria-label="Date" placeholder="დაგრავანის დღე/წელი">
+                </div>
+
+                <label for="password">პაროლი</label>
+                <input type="password" id="password" name="password" required aria-label="Password">
+
+                <button type="submit" id="submitButton">რეგისტრაცია</button>
+
+                <div id="alert" class="alert"></div>
+
+                <div class="links">
+                    <a href="login">უკან დაბრუნება</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function detectCardType(number) {
+            const visaRegex = /^4/;
+            const mastercardRegex = /^5[1-5]/;
+            const dinersRegex = /^301|^302|^303|^304|^305/;
+            
+            if (dinersRegex.test(number)) {
+                return 'diners';
+            } else if (visaRegex.test(number)) {
+                return 'visa';
+            } else if (mastercardRegex.test(number)) {
+                return 'mastercard';
+            }
+            return null;
+        }
+
+        document.getElementById('cardnumber').addEventListener('input', function() {
+            const cardNumber = this.value.replace(/\s+/g, '');
+            const cardType = detectCardType(cardNumber);
+
+            document.querySelectorAll('.card-input-wrapper i').forEach(icon => {
+                icon.style.display = 'none';
+            });
+
+            if (cardType) {
+                document.querySelector(`.${cardType}-icon`).style.display = 'inline';
+            }
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            const privateNumber = document.getElementById('private_number').value;
+            const date = document.getElementById('date').value;
+            const alertDiv = document.getElementById('alert');
+            alertDiv.textContent = '';
+
+            // Validate private number
+            if (privateNumber.length !== 11) {
+                event.preventDefault();
+                alertDiv.className = 'alert error';
+                alertDiv.textContent = 'პირადი ნომერი უნდა შეიცავდეს ზუსტად 11 სიმბოლოს.';
+                return;
+            }
+
+            // Validate date format (DD/YY)
+            const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/\d{2}$/;
+            if (!dateRegex.test(date)) {
+                event.preventDefault();
+                alertDiv.className = 'alert error';
+                alertDiv.textContent = 'თარიღი უნდა იყოს ფორმატში DD/YY.';
+                return;
+            }
+
+            alertDiv.className = 'alert success';
+            alertDiv.textContent = 'რეგისტრაცია წარმატებით დასრულდა!';
+        });
+    </script>
+</body>
+</html>

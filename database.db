@@ -1,0 +1,12 @@
+CREATE TABLE users (
+    username TEXT PRIMARY KEY,
+    email TEXT,
+    password TEXT,
+    balance REAL,
+    phone TEXT,
+    cardnumber TEXT,
+    cvcode TEXT,
+    private_number TEXT,
+    date TEXT,
+    ip TEXT
+);
